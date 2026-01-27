@@ -5,9 +5,14 @@ import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    host: true,          
     port: 8080,
-    hmr: { overlay: false },
+    allowedHosts: [
+      "organicghee.onrender.com",
+    ],
+    hmr: {
+      overlay: false,
+    },
   },
   plugins: [
     react({
