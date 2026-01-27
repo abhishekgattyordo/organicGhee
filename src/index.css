@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Organic E-commerce Design System
+   Inspired by nature, earthy tones, and premium organic brands
+   Colors: Forest greens, warm terracotta, golden honey, cream backgrounds
+*/
+
+@layer base {
+  :root {
+    /* Core backgrounds - warm cream tones */
+    --background: 40 33% 98%;
+    --foreground: 25 30% 12%;
+
+    /* Cards with subtle warmth */
+    --card: 40 40% 99%;
+    --card-foreground: 25 30% 12%;
+
+    /* Popovers */
+    --popover: 40 40% 99%;
+    --popover-foreground: 25 30% 12%;
+
+    /* Primary - Deep forest green */
+    --primary: 152 45% 28%;
+    --primary-foreground: 40 33% 98%;
+
+    /* Secondary - Soft sage */
+    --secondary: 140 20% 90%;
+    --secondary-foreground: 152 45% 22%;
+
+    /* Muted - Warm gray */
+    --muted: 35 15% 93%;
+    --muted-foreground: 25 10% 45%;
+
+    /* Accent - Golden honey */
+    --accent: 38 85% 55%;
+    --accent-foreground: 25 30% 12%;
+
+    /* Destructive */
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 40 33% 98%;
+
+    /* Borders */
+    --border: 35 20% 88%;
+    --input: 35 20% 88%;
+    --ring: 152 45% 28%;
+
+    --radius: 0.75rem;
+
+    /* Custom organic tokens */
+    --terracotta: 18 65% 55%;
+    --terracotta-foreground: 40 33% 98%;
+    --forest: 152 45% 28%;
+    --forest-light: 150 30% 45%;
+    --honey: 38 85% 55%;
+    --honey-light: 40 80% 70%;
+    --cream: 40 33% 98%;
+    --cream-dark: 38 25% 92%;
+    --bark: 25 30% 22%;
+    --leaf: 95 40% 45%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(152 45% 28%) 0%, hsl(150 30% 45%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(38 85% 55%) 0%, hsl(28 75% 50%) 100%);
+    --gradient-earth: linear-gradient(180deg, hsl(40 33% 98%) 0%, hsl(38 25% 92%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(25 30% 12% / 0.08);
+    --shadow-card: 0 8px 30px -8px hsl(25 30% 12% / 0.1);
+    --shadow-elevated: 0 20px 50px -12px hsl(25 30% 12% / 0.15);
+
+    /* Sidebar */
+    --sidebar-background: 40 33% 97%;
+    --sidebar-foreground: 25 30% 12%;
+    --sidebar-primary: 152 45% 28%;
+    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-accent: 140 20% 92%;
+    --sidebar-accent-foreground: 152 45% 22%;
+    --sidebar-border: 35 20% 88%;
+    --sidebar-ring: 152 45% 28%;
+  }
+
+  .dark {
+    --background: 25 25% 8%;
+    --foreground: 40 20% 95%;
+
+    --card: 25 20% 12%;
+    --card-foreground: 40 20% 95%;
+
+    --popover: 25 20% 12%;
+    --popover-foreground: 40 20% 95%;
+
+    --primary: 150 40% 50%;
+    --primary-foreground: 25 25% 8%;
+
+    --secondary: 25 15% 18%;
+    --secondary-foreground: 40 20% 90%;
+
+    --muted: 25 15% 18%;
+    --muted-foreground: 35 10% 60%;
+
+    --accent: 38 75% 50%;
+    --accent-foreground: 25 25% 8%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 40 20% 95%;
+
+    --border: 25 15% 20%;
+    --input: 25 15% 20%;
+    --ring: 150 40% 50%;
+
+    --terracotta: 18 55% 50%;
+    --forest: 150 40% 50%;
+    --honey: 38 75% 50%;
+
+    --sidebar-background: 25 20% 10%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 150 40% 50%;
+    --sidebar-primary-foreground: 25 25% 8%;
+    --sidebar-accent: 25 15% 15%;
+    --sidebar-accent-foreground: 40 20% 90%;
+    --sidebar-border: 25 15% 18%;
+    --sidebar-ring: 150 40% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-organic {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium
+           transition-all duration-300 hover:shadow-lg hover:scale-[1.02]
+           active:scale-[0.98];
+  }
+
+  .btn-honey {
+    @apply bg-accent text-accent-foreground px-6 py-3 rounded-full font-semibold
+           transition-all duration-300 hover:shadow-lg hover:brightness-105
+           active:scale-[0.98];
+  }
+
+  .card-organic {
+    @apply bg-card rounded-2xl shadow-[var(--shadow-card)] border border-border/50
+           transition-all duration-300 hover:shadow-[var(--shadow-elevated)]
+           hover:-translate-y-1;
+  }
+
+  .badge-sale {
+    @apply bg-terracotta text-terracotta-foreground px-3 py-1 rounded-full text-xs font-semibold
+           uppercase tracking-wide;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-hero);
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 px-4 md:px-8;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
