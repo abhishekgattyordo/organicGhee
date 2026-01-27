@@ -23,7 +23,7 @@ const App = () => (
       <CartProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/products" element={<Products />} />
@@ -36,7 +36,7 @@ const App = () => (
         <Route path="/about" element={<AboutPage />} />
             <Route path="/recipies" element={<RecipesPage/>} />
           </Routes>
-        </BrowserRouter>
+       
       </CartProvider>
     </TooltipProvider>
   </QueryClientProvider>
