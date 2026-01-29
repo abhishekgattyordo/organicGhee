@@ -14,6 +14,10 @@ import Account from "./pages/Account";
 import RecipesPage from "./pages/RecipesPage";
 import ContactPage from "./pages/Contact";
 import AboutPage from "./pages/About";
+import Profile from "./pages/ProfilePage";
+import ProductInputPage from "./pages/ProductInputPage";
+import { AdminDashboard } from "./pages/Admin/AdminDashboard";
+import AuthResetPassword from "./pages/AuthResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +39,14 @@ const App = () => (
        <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
             <Route path="/recipies" element={<RecipesPage/>} />
+           <Route path="/profilepage" element={<Profile/>} />
+           <Route path="/productinputpage" element={<ProductInputPage/>} />
+// Add this route with your other routes
+<Route path="/auth/reset-password" element={<AuthResetPassword />} />
+           {/* admin */}
+           <Route path="/admin/products/new" element={<ProductInputPage/>} />
+               <Route path="/admin" element={<AdminDashboard />} />
+               <Route path="/admin/products/edit/:id" element={<ProductInputPage />} />
           </Routes>
         </BrowserRouter>
       </CartProvider>

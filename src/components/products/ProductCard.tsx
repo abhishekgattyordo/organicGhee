@@ -17,6 +17,37 @@ export function ProductCard({ product, className }: ProductCardProps) {
     ? Math.round(((product.compare_price - product.price) / product.compare_price) * 100)
     : 0;
 
+  // Parse the image_url JSON array to get images
+  const getProductImages = () => {
+    if (!product.image_url) return [];
+    
+    try {
+      // Try to parse as JSON array
+      const parsed = JSON.parse(product.image_url);
+      
+      if (Array.isArray(parsed)) {
+        return parsed;
+      }
+      
+      // If it's a single string, return as array with one element
+      if (typeof parsed === 'string') {
+        return [parsed];
+      }
+      
+      return [];
+    } catch (error) {
+      console.error('Error parsing image_url:', error, 'Value:', product.image_url);
+      // If it's not valid JSON, assume it's a single URL string
+      if (typeof product.image_url === 'string') {
+        return [product.image_url];
+      }
+      return [];
+    }
+  };
+
+  const images = getProductImages();
+  const mainImage = images[0] || '/placeholder.svg';
+
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -32,10 +63,23 @@ export function ProductCard({ product, className }: ProductCardProps) {
         {/* Image Container */}
         <div className="relative aspect-square overflow-hidden bg-muted">
           <img
-            src={product.image_url || '/placeholder.svg'}
+            src={mainImage}
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              // Fallback if image fails to load
+              e.currentTarget.src = '/placeholder.svg';
+            }}
           />
+
+          {/* Multiple Images Indicator */}
+          {images.length > 1 && (
+            <div className="absolute top-3 right-3">
+              <Badge className="bg-black/70 text-white text-xs">
+                +{images.length - 1}
+              </Badge>
+            </div>
+          )}
 
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-2">

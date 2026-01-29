@@ -12,7 +12,7 @@ export function Categories() {
     async function fetchCategories() {
       try {
         const { data, error } = await supabase
-          .from('categories')
+          .from('product_categories')
           .select('*')
           .order('name');
 

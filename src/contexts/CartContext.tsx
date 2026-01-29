@@ -25,24 +25,50 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const { toast } = useToast();
 
   const fetchCart = useCallback(async (userId: string) => {
-    setIsLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('cart_items')
-        .select(`
-          *,
-          product:products(*)
-        `)
-        .eq('user_id', userId);
+  console.log('Fetching cart for userId:', userId);
+  setIsLoading(true);
+  try {
+    const { data, error, status, count } = await supabase
+      .from('cart_items')
+      .select(`
+        *,
+        product:products(*)
+      `, { count: 'exact' }) // Get count too
+      .eq('user_id', userId);
 
-      if (error) throw error;
-      setItems(data as CartItem[] || []);
-    } catch (error) {
-      console.error('Error fetching cart:', error);
-    } finally {
-      setIsLoading(false);
+    console.log('Full response:', { 
+      data, 
+      error, 
+      status, 
+      count,
+      hasError: !!error,
+      isDataNull: data === null,
+      dataType: typeof data,
+      dataLength: Array.isArray(data) ? data.length : 'not array'
+    });
+
+    if (error) {
+      console.error('Supabase error details:', {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint
+      });
+      throw error;
     }
-  }, []);
+
+    // Ensure data is always an array
+    const cartItems = Array.isArray(data) ? data : [];
+    console.log('Setting cart items:', cartItems);
+    setItems(cartItems as CartItem[]);
+    
+  } catch (error) {
+    console.error('Error fetching cart:', error);
+    setItems([]); // Ensure empty array on error
+  } finally {
+    setIsLoading(false);
+  }
+}, []);
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
@@ -71,6 +97,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       });
       return;
     }
+    if (!product?.id) {  // ✅ Check product id exists
+    toast({
+      title: 'Error',
+      description: 'Product ID is missing. Cannot add to cart.',
+      variant: 'destructive',
+    });
+    return;
+  }
+
 
     try {
       const existingItem = items.find(item => item.product_id === product.id);

@@ -85,17 +85,44 @@ export default function Cart() {
                   key={item.id}
                   className="flex gap-4 p-4 rounded-xl bg-card border border-border"
                 >
-                  {/* Product Image */}
-                  <Link
-                    to={`/products/${item.product?.slug}`}
-                    className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-muted"
-                  >
-                    <img
-                      src={item.product?.image_url || '/placeholder.svg'}
-                      alt={item.product?.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </Link>
+                
+<Link
+  to={`/products/${item.product?.slug}`}
+  className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-muted flex items-center justify-center"
+>
+  {(() => {
+    const imageUrl = item.product?.image_url;
+    if (!imageUrl) {
+      return <ShoppingBag className="w-8 h-8 text-muted-foreground/30" />;
+    }
+    
+    try {
+      // Try to parse as JSON array
+      const images = JSON.parse(imageUrl);
+      if (Array.isArray(images) && images.length > 0) {
+        return (
+          <img
+            src={images[0]}
+            alt={item.product?.name}
+            className="w-full h-full object-cover"
+          />
+        );
+      }
+    } catch {
+      // If not JSON, use as direct URL
+      return (
+        <img
+          src={imageUrl}
+          alt={item.product?.name}
+          className="w-full h-full object-cover"
+        />
+      );
+    }
+    
+    // Fallback
+    return <ShoppingBag className="w-8 h-8 text-muted-foreground/30" />;
+  })()}
+</Link>
 
                   {/* Product Details */}
                   <div className="flex-1 min-w-0">

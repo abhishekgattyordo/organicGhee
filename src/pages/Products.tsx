@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,7 +17,7 @@ export default function Products() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-
+const navigate = useNavigate();
   const selectedCategory = searchParams.get('category') || 'all';
   const sortBy = searchParams.get('sort') || 'featured';
 
@@ -104,8 +105,16 @@ export default function Products() {
         </section>
 
         {/* Filters & Products */}
+        
         <section className="section-padding">
           <div className="container-custom">
+            <Button
+  className="fixed bottom-6 right-6 rounded-full w-14 h-14 text-xl shadow-xl z-50"
+  onClick={() => navigate("/productinputpage")}
+>
+  +
+</Button>
+
             {/* Filters Bar */}
             <div className="flex flex-col md:flex-row gap-4 mb-8">
               {/* Search */}
