@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
     host: true,          
     port: 8080,
     allowedHosts: [
-      "organicghee.onrender.com",
+      "organicghee-1.onrender.com",
     ],
     hmr: {
       overlay: false,
