@@ -100,3 +100,41 @@ export interface Profile {
   created_at: string;
   updated_at: string;
 }
+export interface Recipe {
+  id: number;
+  title: string;
+  description: string;
+  image_url: string;
+  prep_time: string;
+  difficulty: 'EASY' | 'MEDIUM' | 'HARD' | 'QUICK' | 'RAW' | 'PREP';
+  meal_type: string;
+  health_goals: string[];
+  tags: string[];
+  ingredients: Ingredient[];
+  instructions: InstructionStep[];
+  nutritional_info?: NutritionalInfo;
+  serves?: number;
+  created_at: string;
+}
+
+export interface Ingredient {
+  name: string;
+  quantity: string;
+  unit?: string;
+  optional?: boolean;
+}
+
+export interface InstructionStep {
+  step_number: number;
+  description: string;
+  tip?: string;
+}
+
+export interface NutritionalInfo {
+  calories: string;
+  protein: string;
+  carbs: string;
+  fat: string;
+  fiber?: string;
+  sugar?: string;
+}
