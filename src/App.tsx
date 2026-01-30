@@ -51,7 +51,7 @@ const App = () => (
                <Route path="/admin/products/edit/:id" element={<ProductInputPage />} />
                <Route path="/recipes" element={<RecipesPage />} />
 <Route path="/recipes/:id" element={<RecipeDetailPage />} />
- <Route path="/r" element={<RecipeInputPage />} />
+ <Route path="/recipes/new" element={<RecipeInputPage />} />
  
  
 
