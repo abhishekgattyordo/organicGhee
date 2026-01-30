@@ -38,23 +38,26 @@ const App = () => (
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/account" element={<Account />} />
-       <Route path="/contact" element={<ContactPage />} />
-        <Route path="/about" element={<AboutPage />} />
-           
-           <Route path="/profilepage" element={<Profile/>} />
-           <Route path="/productinputpage" element={<ProductInputPage/>} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/about" element={<AboutPage />} />
 
-<Route path="/auth/reset-password" element={<AuthResetPassword />} />
-           {/* admin */}
-           <Route path="/admin/products/new" element={<ProductInputPage/>} />
-               <Route path="/admin" element={<AdminDashboard />} />
-               <Route path="/admin/products/edit/:id" element={<ProductInputPage />} />
-               <Route path="/recipes" element={<RecipesPage />} />
-<Route path="/recipes/:id" element={<RecipeDetailPage />} />
- <Route path="/recipes/new" element={<RecipeInputPage />} />
- 
- 
+            <Route path="/profilepage" element={<Profile />} />
+            <Route path="/productinputpage" element={<ProductInputPage />} />
 
+            <Route
+              path="/auth/reset-password"
+              element={<AuthResetPassword />}
+            />
+            {/* admin */}
+            <Route path="/admin/products/new" element={<ProductInputPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route
+              path="/admin/products/edit/:id"
+              element={<ProductInputPage />}
+            />
+            <Route path="/recipes" element={<RecipesPage />} />
+            <Route path="/recipes/:id" element={<RecipeDetailPage />} />
+            <Route path="/recipes/new" element={<RecipeInputPage />} />
           </Routes>
         </BrowserRouter>
       </CartProvider>

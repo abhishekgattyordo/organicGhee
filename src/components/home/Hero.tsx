@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import heroImage from '@/assets/hero-organic.jpg';
 
+
 export function Hero() {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden">
