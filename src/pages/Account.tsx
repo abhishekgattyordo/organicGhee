@@ -50,13 +50,11 @@ export default function Account() {
     fetchOrders();
   }, [user, navigate]);
 
-  const handleLogout = async () => {
+ const handleLogout = async () => {
     await supabase.auth.signOut();
-    toast({
-      title: 'Logged out',
-      description: 'You have been successfully logged out.',
-    });
-    navigate('/');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('role');
+    navigate('/auth');
   };
 
   const getStatusIcon = (status: string) => {
